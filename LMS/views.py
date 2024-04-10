@@ -93,7 +93,7 @@ def COURSE_DETAILS(request,slug):
     course_id = Course.objects.get(slug=slug)
     if request.user.is_authenticated:
         try:
-            check_enroll = OrderItem.objects.filter(order__user=request.user, course=course_id).exists()
+            check_enroll = OrderItem.objects.filter(order__user=request.user,order__is_paid=True, course=course_id).exists()
         except OrderItem.DoesNotExist:
             check_enroll = None
 
@@ -127,7 +127,7 @@ def PAGE_NOT_FOUND(request):
 
 @login_required
 def MY_COURSE(request):
-    course = OrderItem.objects.filter(order__user=request.user)
+    course = OrderItem.objects.filter(order__user=request.user, order__is_paid=True)
     context = {
         'course':course,
     }

@@ -72,7 +72,7 @@ def remove_from_cart(request, course_slug):
 @require_POST
 def clear_cart(request):
     cart = Cart(request)
-
+    request.session["coupon_id"] = None
     if len(cart):
         cart.clear()
         messages.success(request, 'All products successfully removed from your cart')

@@ -7,7 +7,7 @@ from azbankgateways.exceptions import AZBankGatewaysException
 def go_to_gateway_view(request):
     order_id = request.session.get('order_id')
     order = get_object_or_404(Order, id=order_id)
-    toman_total_price = order.get_total_price()
+    toman_total_price = (order.get_total_price_after_discount())*10
     user_mobile_number = '+989112221234'
 
     factory = bankfactories.BankFactory()

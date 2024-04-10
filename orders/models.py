@@ -24,7 +24,8 @@ class Order(models.Model):
 
     def get_total_price_after_discount(self):
         total_cost = sum(item.get_cost() for item in self.items.all())
-        return total_cost - total_cost * (self.discount / Decimal(100))
+        total_cost = ((100-self.discount) / Decimal(100)) * total_cost
+        return total_cost
 
     def get_total_price(self):
         return sum(item.get_cost() for item in self.items.all())
@@ -40,7 +41,8 @@ class OrderItem(models.Model):
         return f'OrderItem {self.id}: {self.course} x {self.quantity} (price:{self.price})'
 
     def get_cost(self):
-        return self.price * self.quantity
+        temp = self.price * self.quantity
+        return temp - temp * (self.course.discount / Decimal(100))
 
 
 

@@ -524,7 +524,7 @@
                         <div class="d-flex align-items-center mb-2">
                             <ins class="h2 mb-0">₹ {% discount_calculation course.price course.discount %}</ins>
                             <del class="ms-3">{{course.price}}</del>
-                            <div class="badge badge-lg badge-purple text-white ms-auto fw-normal">91% Off</div>
+                            <div class="badge badge-lg badge-purple text-white ms-auto fw-normal">{{course.discount}}% Off</div>
                         </div>
                         {% endif %}
                         <div class="d-flex align-items-center text-alizarin mb-6">

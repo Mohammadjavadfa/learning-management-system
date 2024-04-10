@@ -44,7 +44,8 @@
                                                             </td>
                                                             <td class="product-price">
                                                                 <span class="product-price-wrapper">
-                                                                    <span class="money">{{ item.course_obj.price}}</span>
+                                                                    <span class="money">{% discount_calculation item.course_obj.price item.course_obj.discount %}</span>
+
                                                                 </span>
                                                             </td>
                                                             <td class="product-quantity">
@@ -105,7 +106,7 @@
                                             </div>
                                             <div class="cart-calculator__item--value">
                                                 <span class="product-price-wrapper">
-                                                    <span class="money">{{cart.get_total_price}}</span>
+                                                    <span class="money">{{cart.get_total_price_after_discount}}</span>
                                                 </span>
                                             </div>
                                         </div>

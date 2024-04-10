@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-ts2&=c2vlvs$6=0=ht820o667$d7%6aze)ttaq^jaz(f&nxc-v
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.1.40']
+ALLOWED_HOSTS = ['192.168.1.37']
 
 # Application definition
 
@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'orders.apps.OrdersConfig',
     'coupons.apps.CouponsConfig',
     'payment.apps.PaymentConfig',
+    # 'dashboard.apps.DashboardConfig',
+    # 'review.apps.ReviewConfig',
     'azbankgateways',
 ]
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"

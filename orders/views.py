@@ -5,7 +5,6 @@ from .forms import OrderForm
 from .models import OrderItem
 @login_required
 def order_create_view(request):
-    coupons_discount = {'123456789' : 30, '987654321' : 50}
     order_form = OrderForm()
     cart = Cart(request)
     if len(cart) == 0:
@@ -18,16 +17,14 @@ def order_create_view(request):
             order_obj = order_form.save(commit=False)
             order_obj.user = request.user
             if cart.coupon:
-                order_obj.coupon = cart.coupon
-                if str(cart.coupon) in coupons_discount:
-                    order_obj.discount = int(coupons_discount[str(cart.coupon)])
-                else:
-                    order_obj.discount = cart.coupon.discount
+                order_obj.discount = cart.coupon.discount
             order_obj.save()
 
             for item in cart:
                 course = item['course_obj']
                 if len(cart) == 1 and course.price==0:
+                    order_obj.is_paid = True
+                    order_obj.save()
                     OrderItem.objects.create(
                         order=order_obj,
                         course=course,
@@ -42,6 +39,7 @@ def order_create_view(request):
                         quantity=item['quantity'],
                         price=course.price,
                     )
+                    order_obj.save()
 
             cart.clear()
             request.user.first_name = order_obj.first_name
